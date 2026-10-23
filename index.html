@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misi Bongkar Ekonomi Malaysia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --navy:#142b49;
+  --blue:#2457e6;
+  --cream:#fff9ed;
+  --ink:#23334b;
+  --muted:#68758a;
+  --line:#e4e9f1;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Nunito',sans-serif;
+}
+button {font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible {
+  outline:3px solid #f4a62a;
+  outline-offset:3px;
+}
+.app {max-width:1120px;margin:auto;padding:20px}
+.topbar {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:24px;flex-wrap:wrap;
+}
+.brand {font-weight:900;letter-spacing:-.5px;color:var(--navy)}
+.brand span {color:var(--blue)}
+.tag {
+  border:1px solid #dce3f0;border-radius:30px;
+  padding:8px 13px;font-size:12px;font-weight:800;background:white;
+}
+.hero {
+  position:relative;overflow:hidden;background:var(--navy);
+  border-radius:28px;padding:clamp(25px,5vw,56px);
+  color:white;min-height:330px;
+}
+.hero:after {
+  content:"";position:absolute;width:280px;height:280px;
+  right:-60px;top:-75px;border:48px solid #ffffff0e;
+  border-radius:50%;pointer-events:none;
+}
+.eyebrow {
+  color:#9db7ff;font-size:12px;letter-spacing:2px;
+  font-weight:900;text-transform:uppercase;
+}
+h1 {font-size:clamp(32px,6vw,60px);line-height:1.05;
+  letter-spacing:-2px;margin:18px 0;max-width:700px}
+.hero p {color:#d1dbeb;max-width:600px;line-height:1.8}
+.btn {
+  border:0;border-radius:12px;padding:12px 18px;
+  background:var(--blue);color:white;font-weight:900;
+  transition:transform .2s,opacity .2s;
+}
+.btn:hover {transform:translateY(-2px)}
+.btn-light {background:white;color:var(--navy)}
+.btn-outline {background:transparent;border:1px solid #cbd5e1;color:var(--navy)}
+.hero .btn-outline {border-color:#70829c;color:white}
+.section {margin-top:34px}
+.section-head {
+  display:flex;justify-content:space-between;align-items:end;
+  gap:12px;margin-bottom:16px;flex-wrap:wrap
+}
+h2 {font-size:clamp(22px,3vw,30px);margin:0;color:var(--navy)}
+h3 {margin:0 0 8px}
+.small {font-size:13px;color:var(--muted);line-height:1.7}
+.progress-wrap {height:8px;background:#e5eaf2;border-radius:10px;overflow:hidden}
+.progress {height:100%;background:var(--blue);width:0;transition:width .3s}
+.stats {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin-top:18px
+}
+.stat {background:white;border:1px solid var(--line);
+  padding:16px;border-radius:17px}
+.stat strong {font-size:24px;color:var(--blue);display:block}
+.stat span {font-size:12px;color:var(--muted)}
+.missions {
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px
+}
+.mission {
+  background:white;border:1px solid var(--line);border-radius:22px;
+  padding:22px;position:relative;overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.mission:hover {transform:translateY(-3px);border-color:#9eb5ff}
+.mission-top {display:flex;justify-content:space-between;gap:10px}
+.emoji {font-size:34px}
+.num {font-size:12px;font-weight:900;color:#8a96a9;letter-spacing:1px}
+.mission h3 {font-size:20px;margin-top:17px;color:var(--navy)}
+.mission p {font-size:13px;line-height:1.7;color:var(--muted);min-height:44px}
+.mission button {margin-top:8px}
+.pill {font-size:11px;font-weight:900;background:#edf2ff;color:#3157c8;
+  padding:6px 9px;border-radius:30px;display:inline-block}
+.feature {
+  background:#eaf0ff;border-radius:22px;padding:24px;
+  display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center
+}
+.feature p {line-height:1.8;font-size:14px}
+.footer {text-align:center;color:var(--muted);font-size:12px;padding:30px 0 12px}
+.hidden {display:none!important}
+.panel {
+  margin-top:20px;background:white;border:1px solid var(--line);
+  border-radius:24px;padding:clamp(18px,4vw,34px)
+}
+.back {margin-bottom:20px}
+.panel h2 {margin-bottom:12px}
+.panel p {line-height:1.85}
+.lesson-grid {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.lesson-item {background:#f5f7fb;padding:17px;border-radius:15px}
+.lesson-item strong {display:block;margin-bottom:6px}
+.question {
+  padding:18px 0;border-top:1px solid var(--line);margin-top:18px
+}
+.answers {display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.answer {
+  text-align:left;background:white;border:1px solid #dce3ed;
+  padding:13px;border-radius:12px;color:var(--ink)
+}
+.answer:hover {border-color:var(--blue);background:#f3f6ff}
+.answer.correct {background:#e5f8ed;border-color:#36a66a}
+.answer.wrong {background:#fff0ed;border-color:#dc6b54}
+.feedback {font-weight:800;font-size:13px;margin-top:12px;min-height:20px}
+.input {
+  width:100%;padding:13px;border:1px solid #dce3ed;
+  border-radius:12px;font:inherit;margin:8px 0 14px
+}
+textarea.input {min-height:100px;resize:vertical}
+@media(max-width:600px) {
+  .app {padding:13px}
+  .missions,.lesson-grid,.answers {grid-template-columns:1fr}
+  .stats {gap:7px}
+  .stat {padding:12px}
+  .stat strong {font-size:20px}
+  .feature {grid-template-columns:1fr}
+  h1 {letter-spacing:-1px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">MISIDETektif<span> .MY</span></div>
+    <div class="tag">SEJARAH TAHUN 6 · 12.2</div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="eyebrow">FAIL KES #12 · OPERASI EKONOMI</div>
+      <h1>MISI BONGKAR<br>EKONOMI MALAYSIA</h1>
+      <p>
+        Empat sektor. Satu misi. Satu negara maju!
+        Terokai perkembangan ekonomi Malaysia, kenal pasti kegiatan
+        ekonomi dan bongkar pencapaian negara.
+      </p>
+      <button class="btn btn-light" onclick="startMission()">
+        MULAKAN SIASATAN ↗
+      </button>
+      <button class="btn btn-outline" onclick="speakIntro()">
+        🔊 Dengar Pengenalan
+      </button>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Pusat Kawalan Detektif</h2>
+          <div class="small">Jejak perkembangan pembelajaran kamu.</div>
+        </div>
+        <span class="pill" id="progressLabel">0% SELESAI</span>
+      </div>
+      <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+      <div class="stats">
+        <div class="stat"><strong id="completed">0/4</strong><span>Misi diterokai</span></div>
+        <div class="stat"><strong id="score">0</strong><span>Jawapan betul</span></div>
+        <div class="stat"><strong id="accuracy">—</strong><span>Ketepatan jawapan</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="missionSection">
+      <div class="section-head">
+        <div>
+          <h2>Pilih Misi Kamu</h2>
+          <div class="small">Klik sektor untuk membuka fail penyiasatan.</div>
+        </div>
+      </div>
+      <div class="missions" id="missionCards"></div>
+    </section>
+
+    <section class="section feature">
+      <div>
+        <span class="pill">MISI AKHIR</span>
+        <h2 style="margin-top:12px">Bilik Operasi Ekonomi</h2>
+        <p>Gabungkan maklumat daripada empat sektor dan
+          jelaskan sekurang-kurangnya dua pencapaian ekonomi Malaysia.
+          Gunakan bukti yang telah kamu pelajari.</p>
+      </div>
+      <button class="btn" onclick="openFinal()">BUKA FAIL AKHIR →</button>
+    </section>
+  </main>
+
+  <section id="lesson" class="panel hidden">
+    <button class="btn btn-outline back" onclick="goHome()">← Kembali ke Pusat Kawalan</button>
+    <div id="lessonContent"></div>
+  </section>
+
+  <section id="finalPanel" class="panel hidden">
+    <button class="btn btn-outline back" onclick="goHome()">← Kembali ke Pusat Kawalan</button>
+    <span class="pill">STANDARD PEMBELAJARAN 12.2.3</span>
+    <h2 style="margin-top:14px">Cabaran Akhir: Bukti Pencapaian</h2>
+    <p>Jawab soalan dan tulis rumusan berdasarkan maklumat yang telah dipelajari.</p>
+    <div id="finalQuestions"></div>
+    <h3 style="margin-top:25px">Rumusan Detektif</h3>
+    <label for="reflection" class="small">
+      Nyatakan dua pencapaian ekonomi Malaysia dan jelaskan kepentingannya.
+    </label>
+    <textarea id="reflection" class="input"
+      placeholder="Contoh: Salah satu pencapaian ekonomi Malaysia ialah..."></textarea>
+    <button class="btn" onclick="saveReflection()">SIMPAN RUMUSAN</button>
+    <div class="feedback" id="reflectionFeedback" aria-live="polite"></div>
+    <div style="margin-top:22px">
+      <button class="btn btn-outline" onclick="resetProgress()">MULA SEMULA</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Bahan pembelajaran digital · Sejarah Tahun 6 · Tajuk 12.2
+    <br>Semak fakta menggunakan buku teks dan sumber pendidikan yang sahih.
+  </footer>
+</div>
+
+<script>
+const missions = [
+ {
+  id:1, icon:"🌾", title:"Sektor Pertanian",
+  subtitle:"Dari tanah ke sumber makanan",
+  color:"#e9f7e9",
+  intro:"Pertanian membekalkan makanan dan bahan mentah. Perkembangannya melibatkan perubahan daripada kaedah tradisional kepada penggunaan teknologi dan pengurusan yang lebih moden.",
+  development:"Pertanian tradisional banyak bergantung pada tenaga manusia dan peralatan asas. Penggunaan jentera, sistem pengairan dan teknik penanaman moden membantu meningkatkan produktiviti.",
+  activities:["Penanaman padi","Penanaman kelapa sawit","Penanaman getah","Perikanan dan penternakan"],
+  contributions:["Membekalkan makanan","Menyediakan bahan mentah untuk industri","Mewujudkan peluang pekerjaan","Menyumbang kepada eksport negara"],
+  question:"Antara berikut, yang manakah kegiatan ekonomi dalam sektor pertanian?",
+  answers:["Pembuatan kereta","Penanaman padi","Perkhidmatan hotel","Pengurusan pelabuhan"],
+  correct:1,
+  explain:"Penanaman padi ialah kegiatan pertanian yang membekalkan makanan kepada penduduk."
+ },
+ {
+  id:2, icon:"🏭", title:"Sektor Perindustrian",
+  subtitle:"Bahan mentah menjadi produk",
+  color:"#eaf0ff",
+  intro:"Perindustrian melibatkan pemprosesan bahan mentah dan pembuatan barangan. Sektor ini menyokong pengeluaran produk, pekerjaan dan perkembangan teknologi.",
+  development:"Perkembangan perindustrian membawa perubahan daripada pengeluaran berskala kecil kepada kilang yang menggunakan mesin, teknologi dan proses pengeluaran yang lebih cekap.",
+  activities:["Pembuatan barangan elektrik dan elektronik","Pemasangan kenderaan","Pemprosesan makanan","Pengeluaran produk berasaskan kelapa sawit"],
+  contributions:["Menghasilkan barangan untuk pasaran","Mewujudkan peluang pekerjaan","Meningkatkan nilai bahan mentah","Menggalakkan penggunaan teknologi"],
+  question:"Apakah contoh kegiatan ekonomi dalam sektor perindustrian?",
+  answers:["Pembuatan barangan elektrik","Lawatan ke pulau","Penanaman padi","Jual beli di pasar sahaja"],
+  correct:0,
+  explain:"Pembuatan barangan elektrik merupakan kegiatan perindustrian kerana melibatkan proses pengeluaran produk."
+ },
+ {
+  id:3, icon:"🚢", title:"Sektor Perdagangan",
+  subtitle:"Menghubungkan pengeluar dan pengguna",
+  color:"#fff0df",
+  intro:"Perdagangan melibatkan kegiatan jual beli barangan dan perkhidmatan. Import ialah barangan atau perkhidmatan yang dibeli dari luar negara, manakala eksport ialah yang dijual ke luar negara.",
+  development:"Perdagangan berkembang melalui jaringan pengangkutan, pelabuhan, pasaran dan hubungan dagangan. Teknologi komunikasi juga memudahkan urusan perdagangan.",
+  activities:["Eksport produk Malaysia","Import mesin dan bahan tertentu","Jual beli barangan","Pengedaran produk ke pasaran"],
+  contributions:["Meluaskan pasaran produk tempatan","Menyokong hubungan perdagangan","Mewujudkan pekerjaan","Menyumbang kepada kegiatan ekonomi negara"],
+  question:"Apakah maksud eksport?",
+  answers:["Membeli barangan dari luar negara","Menjual barangan ke luar negara","Menyimpan barangan di rumah","Menghasilkan tanaman untuk keluarga sahaja"],
+  correct:1,
+  explain:"Eksport ialah penjualan barangan atau perkhidmatan ke luar negara."
+ },
+ {
+  id:4, icon:"🏝️", title:"Sektor Pelancongan",
+  subtitle:"Keindahan Malaysia, tarikan dunia",
+  color:"#e4f7f5",
+  intro:"Pelancongan melibatkan perjalanan dan kunjungan untuk tujuan seperti rekreasi, kebudayaan dan warisan. Malaysia mempunyai tarikan alam semula jadi, bandar serta warisan budaya.",
+  development:"Kemudahan pengangkutan, penginapan, promosi destinasi dan perkhidmatan pelancongan membantu menyokong perkembangan sektor ini.",
+  activities:["Pelancongan alam semula jadi","Pelancongan warisan dan budaya","Perkhidmatan hotel","Pemanduan pelancong dan lawatan"],
+  contributions:["Menyokong perniagaan tempatan","Mewujudkan peluang pekerjaan","Memperkenalkan warisan Malaysia","Membawa pendapatan kepada destinasi pelancongan"],
+  question:"Bagaimanakah pelancongan membantu ekonomi Malaysia?",
+  answers:["Mengurangkan semua kegiatan perniagaan","Menyokong perniagaan dan peluang pekerjaan","Menghentikan perdagangan","Menghapuskan keperluan pengangkutan"],
+  correct:1,
+  explain:"Pelancong menggunakan pelbagai perkhidmatan dan membeli produk tempatan, sekali gus menyokong perniagaan dan pekerjaan."
+ }
+];
+
+let completed = new Set();
+let total = 0;
+let correctTotal = 0;
+let answered = new Set();
+
+function renderCards(){
+ const container=document.getElementById("missionCards");
+ container.innerHTML=missions.map(m=>`
+  <article class="mission">
+    <div class="mission-top">
+      <span class="emoji">${m.icon}</span>
+      <span class="num">FAIL 0${m.id}</span>
+    </div>
+    <h3>${m.title}</h3>
+    <p>${m.subtitle}</p>
+    <span class="pill">${completed.has(m.id)?"✓ DITEROKAI":"MISI TERSEDIA"}</span>
+    <div><button class="btn" onclick="openMission(${m.id})">BUKA FAIL →</button></div>
+  </article>
+ `).join("");
+ updateStats();
+}
+
+function updateStats(){
+ document.getElementById("completed").textContent=completed.size+"/4";
+ document.getElementById("score").textContent=correctTotal;
+ document.getElementById("accuracy").textContent=total?Math.round(correctTotal/total*100)+"%":"—";
+ const percent=Math.round(completed.size/4*100);
+ document.getElementById("progress").style.width=percent+"%";
+ document.getElementById("progressLabel").textContent=percent+"% SELESAI";
+}
+
+function startMission(){
+ document.getElementById("missionSection").scrollIntoView({behavior:"smooth"});
+}
+
+function speakIntro(){
+ if(!("speechSynthesis" in window)){
+  alert("Fungsi audio tidak disokong oleh pelayar ini.");
+  return;
+ }
+ window.speechSynthesis.cancel();
+ const msg=new SpeechSynthesisUtterance(
+  "Selamat datang, detektif ekonomi! Terokai empat sektor ekonomi Malaysia. Kenal pasti perkembangan awal, kegiatan ekonomi dan sumbangannya kepada kemajuan negara."
+ );
+ msg.lang="ms-MY";
+ window.speechSynthesis.speak(msg);
+}
+
+function goHome(){
+ document.getElementById("home").classList.remove("hidden");
+ document.getElementById("lesson").classList.add("hidden");
+ document.getElementById("finalPanel").classList.add("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+ renderCards();
+}
+
+function openMission(id){
+ const m=missions.find(x=>x.id===id);
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("finalPanel").classList.add("hidden");
+ document.getElementById("lesson").classList.remove("hidden");
+
+ document.getElementById("lessonContent").innerHTML=`
+  <span class="pill">FAIL 0${m.id} · STANDARD 12.2.1 & 12.2.2</span>
+  <div style="font-size:48px;margin-top:18px">${m.icon}</div>
+  <h2>${m.title}</h2>
+  <p>${m.intro}</p>
+  <div class="lesson-grid">
+    <div class="lesson-item">
+      <strong>🕰️ Perkembangan Awal</strong>
+      <div class="small">${m.development}</div>
+    </div>
+    <div class="lesson-item">
+      <strong>🔎 Kegiatan Ekonomi</strong>
+      <div class="small">${m.activities.map(x=>"• "+x).join("<br>")}</div>
+    </div>
+  </div>
+  <div class="lesson-item">
+    <strong>🇲🇾 Sumbangan kepada Negara</strong>
+    <p class="small">${m.contributions.map(x=>"• "+x).join("<br>")}</p>
+  </div>
+  <div class="question">
+    <span class="pill">UJI MINDA</span>
+    <h3 style="margin-top:12px">${m.question}</h3>
+    <div class="answers" id="answers"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+  </div>
+  <button class="btn" onclick="goHome()">KEMBALI KE SEMUA MISI →</button>
+ `;
+ document.getElementById("answers").innerHTML=m.answers.map((a,i)=>`
+   <button class="answer" onclick="checkAnswer(${m.id},${i},this)">${String.fromCharCode(65+i)}. ${a}</button>
+ `).join("");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function checkAnswer(id,index,button){
+ const m=missions.find(x=>x.id===id);
+ const key="m"+id;
+ const feedback=document.getElementById("feedback");
+ if(answered.has(key)){
+  feedback.textContent="Kamu telah menjawab soalan ini. Terokai penerangan dan teruskan misi!";
+  return;
+ }
+ answered.add(key);
+ total++;
+ const buttons=document.querySelectorAll("#answers .answer");
+ buttons.forEach((b,i)=>{
+  b.disabled=true;
+  if(i===m.correct)b.classList.add("correct");
+ });
+ if(index===m.correct){
+  correctTotal++;
+  feedback.textContent="✓ Tepat! "+m.explain;
+ } else {
+  button.classList.add("wrong");
+  feedback.textContent="Belum tepat. "+m.explain;
+ }
+ completed.add(id);
+ updateStats();
+}
+
+function openFinal(){
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("lesson").classList.add("hidden");
+ document.getElementById("finalPanel").classList.remove("hidden");
+ const qs=[
+  {q:"1. Apakah contoh sumbangan sektor pertanian?",
+   a:["Membekalkan makanan dan bahan mentah","Menghentikan pengeluaran makanan"],c:0},
+  {q:"2. Mengapakah sektor perindustrian penting?",
+   a:["Menghasilkan barangan dan peluang pekerjaan","Menghapuskan semua perdagangan"],c:0},
+  {q:"3. Apakah maksud import?",
+   a:["Menjual barangan ke luar negara","Membeli barangan atau perkhidmatan dari luar negara"],c:1},
+  {q:"4. Pilih sumbangan sektor pelancongan.",
+   a:["Menyokong perniagaan tempatan","Menghentikan aktiviti kebudayaan"],c:0},
+  {q:"5. Apakah yang boleh membantu perkembangan ekonomi?",
+   a:["Penggunaan teknologi dan kemahiran","Mengabaikan kualiti produk"],c:0}
+ ];
+ document.getElementById("finalQuestions").innerHTML=qs.map((q,i)=>`
+  <div class="question">
+   <strong>${q.q}</strong>
+   <div class="answers">
+    ${q.a.map((a,j)=>`<button class="answer" onclick="finalAnswer(${i},${j},this)">${a}</button>`).join("")}
+   </div>
+   <div class="feedback" id="fq${i}" aria-live="polite"></div>
+  </div>
+ `).join("");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+let finalAnswered=new Set();
+function finalAnswer(qi,ai,button){
+ if(finalAnswered.has(qi))return;
+ finalAnswered.add(qi);
+ const qs=[
+  {c:0,e:"Pertanian membekalkan makanan dan bahan mentah."},
+  {c:0,e:"Perindustrian menghasilkan barangan dan menyokong peluang pekerjaan."},
+  {c:1,e:"Import ialah pembelian barangan atau perkhidmatan dari luar negara."},
+  {c:0,e:"Pelancongan menyokong perniagaan dan pekerjaan tempatan."},
+  {c:0,e:"Teknologi dan kemahiran boleh membantu meningkatkan produktiviti."}
+ ];
+ const q=qs[qi];
+ const all=button.parentElement.querySelectorAll("button");
+ all.forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct")});
+ const f=document.getElementById("fq"+qi);
+ if(ai===q.c){correctTotal++;total++;f.textContent="✓ Betul! "+q.e}
+ else {total++;button.classList.add("wrong");f.textContent="Semak semula: "+q.e}
+ updateStats();
+ if(finalAnswered.size===qs.length){
+  f.textContent+=" | Cabaran selesai! Semak jawapan dan tulis rumusan kamu.";
+ }
+}
+
+function saveReflection(){
+ const value=document.getElementById("reflection").value.trim();
+ const feedback=document.getElementById("reflectionFeedback");
+ if(value.length<20){
+  feedback.textContent="Sila tulis rumusan yang lebih lengkap dengan sekurang-kurangnya dua pencapaian ekonomi.";
+  return;
+ }
+ feedback.textContent="Rumusan telah direkodkan dalam halaman ini. Sila serahkan kepada guru mengikut arahan kelas.";
+}
+
+function resetProgress(){
+ if(!confirm("Adakah kamu pasti mahu memulakan semula semua kemajuan?"))return;
+ completed=new Set();total=0;correctTotal=0;
+ answered=new Set();finalAnswered=new Set();
+ document.getElementById("reflection").value="";
+ document.getElementById("reflectionFeedback").textContent="";
+ renderCards();goHome();
+}
+
+renderCards();
+</script>
+</body>
+</html>
